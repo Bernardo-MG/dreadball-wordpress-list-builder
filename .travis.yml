@@ -20,25 +20,8 @@ env:
   # WordPress 3.9
   - WP_VERSION=3.9
 
-before_install:
-  # set up WP install
-  - export WP_DEVELOP_DIR=/tmp/wordpress/
-  - mkdir -p $WP_DEVELOP_DIR
-  - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
-  - plugin_slug=$(basename $(pwd))
-  - plugin_dir=$WP_DEVELOP_DIR/src/wp-content/plugins/$plugin_slug
-  - cd ..
-  - mv $plugin_slug $plugin_dir
-  # set up tests config
-  - cd $WP_DEVELOP_DIR
-  - echo $WP_DEVELOP_DIR
-  - cp wp-tests-config-sample.php wp-tests-config.php
-  - sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-tests-config.php
-  - sed -i "s/yourusernamehere/travis/" wp-tests-config.php
-  - sed -i "s/yourpasswordhere//" wp-tests-config.php
-  # create database
-  - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
-  # prepare for running the tests
-  - cd $plugin_dir
+before_script:
+  - bash .scripts/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 
-# script: phpunit
+script:
+  - phpunit
