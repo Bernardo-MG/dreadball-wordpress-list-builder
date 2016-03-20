@@ -32,6 +32,15 @@ class Dreadball_List_Builder_Admin {
 	private $plugin_name;
 
 	/**
+	 * The options name to be used in this plugin
+	 *
+	 * @since  	1.0.0
+	 * @access 	private
+	 * @var  	string 		$option_name 	Option name of this plugin
+	 */
+	private $option_name = 'dreadball_list_builder';
+
+	/**
 	 * The version of this plugin.
 	 *
 	 * @since    1.0.0
@@ -98,6 +107,76 @@ class Dreadball_List_Builder_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dreadball-list-builder-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	/**
+	 * Add an options page under the Settings submenu
+	 *
+	 * @since  1.0.0
+	 */
+	public function add_options_page() {
+
+		$this->plugin_screen_hook_suffix = add_options_page(
+			__( 'Dreadball List Builder Settings', 'dreadball-list-builder' ),
+			__( 'Dreadball List Builder', 'dreadball-list-builder' ),
+			'manage_options',
+			$this->plugin_name,
+			array( $this, 'display_options_page' )
+		);
+
+	}
+
+	/**
+	 * Render the options page for plugin
+	 *
+	 * @since  1.0.0
+	 */
+	public function display_options_page() {
+		include_once 'partials/dreadball-list-builder-admin-display.php';
+	}
+
+	/**
+	 * Register all related settings of this plugin
+	 *
+	 * @since  1.0.0
+	 */
+	public function register_setting() {
+
+		add_settings_section(
+			$this->option_name . '_general',
+			__( 'General', 'dreadball-list-builder' ),
+			array( $this, $this->option_name . '_general_cb' ),
+			$this->plugin_name
+		);
+
+		add_settings_field(
+			$this->option_name . '_url',
+			__( 'URL to the web service', 'dreadball-list-builder' ),
+			array( $this, $this->option_name . '_url_cb' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_url' )
+		);
+
+	}
+
+	/**
+	 * Render the text for the general section
+	 *
+	 * @since  1.0.0
+	 */
+	public function outdated_notice_general_cb() {
+		echo '<p>' . __( 'Please change the settings accordingly.', 'outdated-notice' ) . '</p>';
+	}
+
+	/**
+	 * Render the URL input for this plugin
+	 *
+	 * @since  1.0.0
+	 */
+	public function dreadball_list_builder_url_cb() {
+		$url = get_option( $this->option_name . '_url' );
+		echo '<input type="text" name="' . $this->option_name . '_url' . '" id="' . $this->option_name . '_url' . '" value="' . $url . '"> ';
 	}
 
 }
