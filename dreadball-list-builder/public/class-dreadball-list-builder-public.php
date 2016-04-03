@@ -52,6 +52,8 @@ class Dreadball_List_Builder_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		add_shortcode( 'test_shortcode', array( $this, 'test_shortcode_func' )  );
+		add_shortcode( 'dreadball_list_abilities', array( $this, 'list_abilities_func' )  );
 	}
 
 	/**
@@ -98,6 +100,14 @@ class Dreadball_List_Builder_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dreadball-list-builder-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	function test_shortcode_func() {
+		return '<p>TEST TEXT</p>';
+	}
+
+	function list_abilities_func() {
+		include_once 'partials/dreadball-list-builder-public-abilities-list.php';
 	}
 
 }
