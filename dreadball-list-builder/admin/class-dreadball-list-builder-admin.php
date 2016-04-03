@@ -158,6 +158,7 @@ class Dreadball_List_Builder_Admin {
 			array( 'label_for' => $this->option_name . '_url' )
 		);
 
+		register_setting( $this->plugin_name, $this->option_name . '_url', 'strval' );
 	}
 
 	/**
