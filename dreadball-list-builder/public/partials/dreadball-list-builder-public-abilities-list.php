@@ -12,12 +12,14 @@
  * @subpackage Dreadball_List_Builder/public/partials
  */
 
+use Tabletop\Dreadball\Unit\DefaultAbility;
+
 function abilities_table_rows() {
-    $abilities = array('Ability1', 'Ability2', 'Ability3');
+    $abilities = array(new DefaultAbility('Ability1'),  new DefaultAbility('Ability2'),  new DefaultAbility('Ability3'));
 
     $rows = '';
     foreach ($abilities as $ability){
-        $rows .= '<tr><td>' . $ability . '</td></tr>';
+        $rows .= '<tr><td>' . $ability->getName() . '</td></tr>';
     }
 
     return $rows;

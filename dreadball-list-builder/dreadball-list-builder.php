@@ -36,6 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function activate_dreadball_list_builder() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dreadball-list-builder-activator.php';
+
 	Dreadball_List_Builder_Activator::activate();
 }
 
@@ -56,6 +57,9 @@ register_deactivation_hook( __FILE__, 'deactivate_dreadball_list_builder' );
  * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-dreadball-list-builder.php';
+
+// Model
+require plugin_dir_path( __FILE__ ) . 'model/unit/Ability.php';
 
 /**
  * Begins execution of the plugin.
