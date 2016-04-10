@@ -61,6 +61,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-dreadball-list-builder.php
 // Model
 require plugin_dir_path( __FILE__ ) . 'model/unit/Ability.php';
 
+// Client
+require plugin_dir_path( __FILE__ ) . 'client/parser/JSONAbilityParser.php';
+require plugin_dir_path( __FILE__ ) . 'client/AbilityClient.php';
+
 /**
  * Begins execution of the plugin.
  *
