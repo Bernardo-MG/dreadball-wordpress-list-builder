@@ -15,7 +15,7 @@ class JSONAbilityParser
      */
     public function parse($json)
     {
-        $parsed = new DefaultAbility($json->name);
+        $parsed = new DefaultAbility($json->getName());
 
         return $parsed;
     }
