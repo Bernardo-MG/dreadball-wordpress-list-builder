@@ -2,7 +2,7 @@
 
 namespace Tabletop\Dreadball\Client\Parser;
 
-use Tabletop\Dreadball\Unit;
+use Tabletop\Dreadball\Unit\DefaultAbility;
 
 class JSONAbilityParser
 {
@@ -15,9 +15,7 @@ class JSONAbilityParser
      */
     public function parse($json)
     {
-        $parsed = new Ability();
-
-        $parsed->name = $json->name;
+        $parsed = new DefaultAbility($json->name);
 
         return $parsed;
     }
