@@ -46,5 +46,19 @@
     "test": [
       "vendor/bin/phpcs --ignore=wp/,vendor/ -n -s ."
     ]
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Tabletop\\Dreadball\\Client\\Parser\\" : "dreadball-list-builder/client/parser",
+      "Tabletop\\Dreadball\\Client\\" : "src/client",
+      "Tabletop\\Dreadball\\Unit\\" : "src/Model"
+    }
+  },
+  "autoload-dev" : {
+    "psr-4" : {
+      "Tabletop\\Dreadball\\Client\\Parser\\" : "dreadball-list-builder/client/parser",
+      "Tabletop\\Dreadball\\Client\\" : "src/client",
+      "Tabletop\\Dreadball\\Unit\\" : "src/Model"
+    }
   }
 }
